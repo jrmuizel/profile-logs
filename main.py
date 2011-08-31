@@ -58,7 +58,7 @@ class ServeHandler(blobstore_handlers.BlobstoreDownloadHandler):
 class ListHandler(webapp.RequestHandler):
     def get(self):
         self.response.out.write('<html><body>')
-        self.response.out.write('f' + str(blobstore.BlobInfo.all().count()))
+        self.response.out.write('count: ' + str(blobstore.BlobInfo.all().count()))
 
 
 def main():
