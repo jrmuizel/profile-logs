@@ -34,7 +34,8 @@ class FileHandler(webapp.RequestHandler):
 
         # Open the file and write to it
         with files.open(file_name, 'a') as f:
-              f.write(self.request.get('file'))
+              content = self.request.get('file')
+              f.write(content.encode('utf-8'))
 
         # Finalize the file. Do this before attempting to read it.
         files.finalize(file_name)
@@ -53,7 +54,7 @@ class ServeHandler(blobstore_handlers.BlobstoreDownloadHandler):
     def get(self, resource):
         resource = str(urllib.unquote(resource))
         blob_info = blobstore.BlobInfo.get(resource)
-        self.send_blob(blob_info, content_type="text/plain")
+        self.send_blob(blob_info, content_type="text/plain; charset=utf-8")
 
 class ListHandler(webapp.RequestHandler):
     def get(self):
