@@ -42,7 +42,8 @@ class FileHandler(webapp.RequestHandler):
         blob_key = files.blobstore.get_blob_key(file_name)
         
         # Get the file's blob key
-        self.redirect('/serve/%s' % blob_key)
+        #self.redirect('/serve/%s' % blob_key)
+        self.response.out.write(blob_key)
 
 class UploadHandler(blobstore_handlers.BlobstoreUploadHandler):
     def post(self):
